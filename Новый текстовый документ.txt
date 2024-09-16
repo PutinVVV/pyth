@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+"""
+Редактор Spyder
+
+Это временный скриптовый файл.
+"""
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+s=10
+b0=27
+dl0=[0]*s
+dl1=[0]*s
+def f(n):
+    if n==0:
+        return 0
+    if n==1:
+        return 1
+    else:
+        return f(n-1)+f(n-2)
+for j in range(s):
+    n=b0+j
+    a1=time.time()
+    print("n=",n,"fibonach=",f(n-1))
+    dl1[j]=time.time()-a1
+    print("time=",dl1[j])
+    #
+    a=time.time()
+    F=[0]*n
+    if n>1:
+        F[1]=1
+    for i in range(2,n):
+        F[i]=F[i-1]+F[i-2]
+    print ('n=',n,'fibonach_2=',F[n-1])
+    dl0[j]=time.time()-a
+    st=('время расчета цикл',dl0[j])
+    print(st)
+nn=np.arange(b0,b0+s)
+plt.plot(nn,dl0,label='cycle.time')
+plt.plot(nn,dl1,label='functh.time')
+plt.legend()
+plt.show()
